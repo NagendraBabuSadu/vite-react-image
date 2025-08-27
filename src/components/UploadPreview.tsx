@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 interface UploadPreviewProps {
   image: string | null;
-  setImageDataUrl: (url: string | null) => void; // allow null
+  setImageDataUrl: (url: string | null) => void;
 }
 
 export default function UploadPreview({
@@ -37,7 +37,16 @@ export default function UploadPreview({
   return (
     <div className="w-full">
       <div
+        tabIndex={0}
+        role="button"
+        aria-label="Click or drag image to upload"
         onClick={() => fileInputRef.current?.click()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            fileInputRef.current?.click();
+          }
+        }}
         onDragOver={(e) => {
           e.preventDefault();
           setDragOver(true);
@@ -64,7 +73,7 @@ export default function UploadPreview({
                 setImageDataUrl(null);
               }}
               className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full hover:bg-red-600 transition"
-              aria-label="Remove image"
+              aria-label="Remove uploaded image"
             >
               ✕
             </button>
@@ -98,6 +107,7 @@ export default function UploadPreview({
         onChange={handleFileChange}
         ref={fileInputRef}
         className="hidden"
+        aria-hidden="true"
       />
     </div>
   );

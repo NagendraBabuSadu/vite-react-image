@@ -13,7 +13,6 @@ export default function PromptStyleForm({
 }: PromptStyleProps) {
   return (
     <div className="flex flex-col gap-6 w-full">
-    
       <div className="flex flex-col gap-2">
         <label
           htmlFor="prompt-input"
@@ -27,11 +26,11 @@ export default function PromptStyleForm({
           value={prompt}
           onChange={(e) => onPromptChange(e.target.value)}
           placeholder="Enter prompt..."
+          aria-label="Prompt text"
           className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
         />
       </div>
 
-   
       <div className="flex flex-col gap-2">
         <label
           htmlFor="style-select"
@@ -43,6 +42,7 @@ export default function PromptStyleForm({
           id="style-select"
           value={style}
           onChange={(e) => onStyleChange(e.target.value)}
+          aria-label="Select style"
           className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
         >
           <option value="Editorial">Editorial</option>

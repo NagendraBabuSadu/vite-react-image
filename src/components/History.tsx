@@ -14,11 +14,11 @@ interface HistoryProps {
 export default function History({ history, onSelect }: HistoryProps) {
   console.log("histor", history);
   return (
-    <div className="history-container bg-gray-300 rounded-2xl shadow-lg p-6 flex flex-col gap-4 h-full overflow-y-auto scrollbar-hide">
+    <div className="history-container bg-gray-300 rounded-2xl shadow-lg p-6 flex flex-col gap-4 h-full scrollbar-hide">
       <h3 className="text-lg font-semibold text-gray-800 mb-2">🕘 History</h3>
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-3" role="list">
         {history.map((item) => (
-          <li key={item.id}>
+          <li key={item.id} role="listitem">
             <button
               onClick={() => onSelect(item)}
               className="flex items-center gap-3 w-full text-left p-2 rounded-lg hover:bg-indigo-50 transition bg-gray-500"
