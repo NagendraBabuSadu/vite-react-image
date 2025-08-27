@@ -1,9 +1,11 @@
 import { useState, useRef } from "react";
+
 interface Props {
   imageDataUrl: string | null;
   prompt: string;
   style: string;
   setHistory: (cb: any) => void;
+  onSuccess?: () => void; // callback after adding to history
 }
 
 export default function GenerateButton({
@@ -11,6 +13,7 @@ export default function GenerateButton({
   prompt,
   style,
   setHistory,
+  onSuccess,
 }: Props) {
   const [loading, setLoading] = useState(false);
   const controllerRef = useRef<AbortController | null>(null);
@@ -39,8 +42,9 @@ export default function GenerateButton({
     while (attempts < 3) {
       try {
         const res = await mockApi();
-        setHistory((prev: any) => [res, ...prev.slice(0, 4)]);
+        setHistory((prev: any) => [res, ...prev].slice(0, 50));
         setLoading(false);
+        if (onSuccess) onSuccess();
         return;
       } catch (err: any) {
         attempts++;
@@ -60,15 +64,22 @@ export default function GenerateButton({
   };
 
   return (
-    <div>
-      <button onClick={handleGenerate} disabled={loading}>
-        Generate
+    <div className="flex items-center gap-4 mt-4">
+      <button
+        onClick={handleGenerate}
+        disabled={loading}
+        className="bg-indigo-600 text-white px-6 py-3 rounded-xl shadow-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition w-full"
+      >
+        {loading ? "Generating..." : "Generate"}
       </button>
+
       {loading && (
-        <>
-          <span className=""></span>
-          <button onClick={handleAbort}>Abort</button>
-        </>
+        <button
+          onClick={handleAbort}
+          className="bg-gray-200 text-gray-700 px-4 py-2 rounded-xl shadow hover:bg-gray-300 transition"
+        >
+          Abort
+        </button>
       )}
     </div>
   );
