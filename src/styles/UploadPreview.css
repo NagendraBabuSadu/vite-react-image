@@ -1,0 +1,32 @@
+.upload-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upload-label {
+  background: #6200ee;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.upload-label:focus {
+  outline: 3px solid #ff9800;
+}
+
+.preview-img {
+  max-width: 200px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+}
